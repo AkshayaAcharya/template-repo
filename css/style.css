@@ -1,0 +1,268 @@
+html
+{
+    -moz-user-select     : none;
+    -khtml-user-select   : none;
+    -webkit-user-select  : none;
+    -o-user-select       : none;
+    user-select          : none;
+}
+#simscreen
+{
+position: relative;
+left:0px;
+top:0px;
+height: 600px; 
+width:800px;
+border:solid 1px;
+}
+
+#copyright{
+position: absolute;
+left:50px;
+top: 580px;
+font-family: verdana; 
+font-size:12px
+}
+
+#title{
+position:relative;
+left: 0px;
+top: 0px;
+height:40px;
+font-size: 24px;
+text-align:center;
+background-color: black;
+font-family: verdana;
+color: White;
+text-transform: uppercase; 
+}
+
+#title h3{
+padding-top:2px;
+margin:0px;}
+
+#question-div{
+	position: absolute;
+	left:300px;
+	top:350px;
+	width:300px;
+	height:120px;
+	border:solid 1px gray;
+	background-color: gray;
+	filter: alpha(opacity=55);
+	color:white;
+	visibility:hidden;
+}
+
+.simsubscreen
+{
+position:absolute;
+left: 50px;
+top: 50px;
+height:530px;
+width:745px;
+
+}
+
+.incanvas
+{
+margin:5px 0 0 5px;
+padding:0;
+}
+#nextButton{
+    position: absolute;
+    left: 750px;
+    top: 530px;
+cursor:pointer;
+}
+#nextButton1{
+    position: absolute;
+    left: 750px;
+    top: 530px;
+cursor:pointer;
+}
+
+#prevButton{
+    position: absolute;
+    left: 0px;
+    top: 532px;
+cursor:pointer;
+}
+
+
+.steptext{
+display:inline;}
+
+.steptext-6{
+display:inline;}
+
+.steptext-2{display:inline;}
+
+.circlebg
+{
+border-radius:100%;
+font-size:25px;
+color:#fff;
+text-align:center;
+background:#000
+}
+
+/* -------------------------------------- water ---------------------------------------- */
+/* Chrome, Safari, Opera */
+@-webkit-keyframes water-4 {
+0% {-webkit-transform: translate(0, 0 );}
+100% {-webkit-transform: translate(0, -20px );}
+}
+
+/* Standard syntax */
+@keyframes water-4 {
+    0% {transform: translate(0, 0);}
+    100% {transform: translate(0, -20px);}
+}
+
+@-webkit-keyframes water-5 {
+0% {-webkit-transform: translate(0, 0 );}
+100% {-webkit-transform: translate(0, -35px );}
+}
+
+/* Standard syntax */
+@keyframes water-5 {
+    0% {transform: translate(0, 0);}
+    100% {transform: translate(0, -35px);}
+}
+/* -------------------------------------- constant speed arrow ---------------------------------------- */
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes arrow-1 {
+0% {-webkit-transform: rotate(0deg);}    
+100% {-webkit-transform: rotate(-50deg);}
+}
+
+/* Standard syntax */
+@keyframes arrow-1 {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(-50deg);}
+}
+/* -------------------------------------- constant speed arrow 2 ---------------------------------------- */
+/* Chrome, Safari, Opera */
+@-webkit-keyframes arrow-11 {
+0% {-webkit-transform: rotate(0deg);}    
+100% {-webkit-transform: rotate(70deg);}
+}
+
+/* Standard syntax */
+@keyframes arrow-11 {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(70deg);}
+}
+
+
+
+/* -------------------------------------- ---------------------------------------- */
+/* Chrome, Safari, Opera */
+@-webkit-keyframes valveturn-2 {
+0% {-webkit-transform: rotate(0deg);}    
+100% {-webkit-transform: rotate(-20deg);}
+}
+
+/* Standard syntax */
+@keyframes valveturn-2 {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(-20deg);}
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes valveturn-4 {
+0% {-webkit-transform: rotate(0deg);}    
+100% {-webkit-transform: rotate(-20deg);}
+}
+
+/* Standard syntax */
+@keyframes valveturn-4 {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(-20deg);}
+}
+
+
+/* Standard syntax */
+@keyframes water0 {
+    0% {transform: translate(0, 0);}
+    100% {transform: translate(0, -100px);}
+}
+
+/* Standard syntax */
+@keyframes water0 {
+    0% {transform: translate(0, 0);}
+    100% {transform: translate(0, -100px);}
+}
+
+
+/*-----------------------------------------hook gauge----------------------- */
+/* Chrome, Safari, Opera */
+@-webkit-keyframes myhook-1 {
+0% {-webkit-transform: translate(0, 0 );}
+50% {-webkit-transform: translate(0, -15px );}
+
+100% {-webkit-transform: translate(0, 8px );}
+}
+
+/* Standard syntax */
+@keyframes myhook-1 {
+    0% {transform: translate(0, 0);}
+	50% {transform: translate(0, -15px);}
+	
+	
+    100% {transform: translate(0, 8px);}
+}
+
+@-webkit-keyframes myhook-2 {
+0% {-webkit-transform: translate(0, 0 );}
+50% {-webkit-transform: translate(0, -50px );}
+
+100% {-webkit-transform: translate(0, -15px );}
+}
+
+/* Standard syntax */
+@keyframes myhook-2 {
+    0% {transform: translate(0, 0px);}
+	50% {transform: translate(0, -50px);}
+	
+	
+    100% {transform: translate(0, -15px);}
+}
+
+
+/*-----------------------------------------blink----------------------- */
+
+@keyframes bucketMove
+{
+	from {left:50px;top:150px;}
+	to {left:550px;top:150px;}
+}
+@-webkit-keyframes bucketMove
+{
+	from {left:50px;top:150px;}
+	to {left:550px;top:150px;}
+}
+
+@keyframes bucketScale
+{
+	from {transform: scale(1)}
+	to {transform: scale(2)}
+}
+@-webkit-keyframes bucketScale
+{
+	from {transform: scale(1)}
+	to {transform: scale(5)}
+}
+
+@keyframes bucketRotate
+{
+	from {transform: rotate(0deg)}
+	to {transform: rotate(30deg)}
+}
+@-webkit-keyframes bucketRotate
+{
+	from {transform: rotate(0deg)}
+	to {transform: rotate(30deg)}
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script>
+        var simsubscreennum=0;
+        var temp=0;
+    </script>
+</head>
+<!--Simulation Screen start		-->
+<div id="simscreen">
+
+    <!--Title of Simulation		-->
+    <div id="title"><h3>CASTING FOR A SOLID PATTERN</h3></div>
+    
+    <!--SubScreen Home	-->
+    <div class="simsubscreen" id="canvas0">
+    <h4 class="incanvas" style="font-family:verdana; ">Objective:</h4>
+    <p class="incanvas" style="font-family:verdana; font-size:15px;">To prepare a casting for the solid pattern using sand moulding process.</p></br>
+    <h4 class="incanvas" style="font-family:verdana; ">Apparatus used:</h4>
+    <p class="incanvas" style="font-family:verdana; font-size:14px;">Moulding sand, Pattern, Moulding Boxes, Runner, Riser etc.</p>
+    <img id="" style="position: absolute; left: 370px; top: 285px; width:250px; height:150px;" title="tray" src="Images/1.png"/>
+    <!-- <img style="position:absolute; left:10px; top:160px;" title="" src="Images/human.png" /> -->
+    <img id="pat1" style="position:absolute; left:180px; top:290px; width:100px" title="pattern" src="Images/pat2.png" />
+    <img id="pat2" style="position:absolute; left:180px; top:350px; width:100px" title="pattern" src="Images/pat1.png" />
+    <img id="pat1" style="position:absolute; left:10px; top:250px; width:150px" title="sand" src="Images/bucket.png" />
+     
+    <!-- <img id="" style="position:absolute; left:250px;top:250px;" title="sand" src="./images/box.png" /> -->
+    </div>
+    
+    <!--Step1	-->
+    <div class="simsubscreen" id="canvas1" style="visibility:hidden">
+    <strong id="titlestep" class="incanvas">STEP </strong>
+    <span class="circlebg" id="stepnumber">&nbsp;1&nbsp;</span>
+    <p id="pumptext" class="steptext" style="font-family:verdana; font-size:14px;"> Set the inverted drag box on a clean floor and place the pattern inside the box.</p>
+    <img id="bucket" style="position:absolute; left:50px;top:150px;" title="sand" src="./images/box.png" />
+    <div class="inputs" style="position: absolute;left: 350px;top: 350px;">
+        <button id="translate" style="cursor: pointer;">Translate</button>
+        <button id="scale" style="visibility: hidden;cursor: pointer;">Scale</button>
+        <button id="rotate" style="visibility: hidden;cursor: pointer;">Rotate</button>
+    </div>
+    </div>
+    <!--Step2	-->
+    
+    
+    <div class="simsubscreen" id="canvas2" style="visibility:hidden">
+    
+    <strong id="titlestep" class="incanvas">STEP &nbsp;</strong>
+    <span class="circlebg" id="stepnumber">&nbsp;2&nbsp;</span>
+    <p id="pumptext-2" class="steptext" style="font-family:verdana; font-size:14px;">&nbsp;Remove the stopper and add weighed amount of cement, then weigh the flask with stopper.</p>
+    
+    
+    
+    </div>
+    
+    <!--Step3	-->
+    <div class="simsubscreen" id="canvas3" style="visibility:hidden">
+    <strong class="incanvas">STEP &nbsp;</strong><span class="circlebg">&nbsp;3&nbsp;</span>
+    <p class="steptext" style="font-family:verdana; font-size:14px;">&nbsp;Add kerosene to the flask upto the graduated mark and shake it well to remove air bubbles. </p>
+    
+    </div>
+    
+    <!--Step4	-->
+    <div class="simsubscreen" id="canvas4" style="visibility:hidden">
+    <strong class="incanvas">STEP &nbsp;</strong><span class="circlebg">&nbsp;4&nbsp;</span>
+    
+    </div>
+    
+    <!--Step5	-->
+    <div class="simsubscreen" id="canvas5" style="visibility:hidden">
+    <strong class="incanvas">STEP &nbsp;</strong><span class="circlebg">&nbsp;5&nbsp;</span>
+    <p class="steptext" style="font-family:verdana; font-size :14px;">&nbsp;Add water to Le-Chatelier’s flask upto graduated mark and weigh it. </p>
+    
+    </div>
+    
+    <!--Step6	-->
+    <div class="simsubscreen" id="canvas6" style="visibility:hidden">
+    <!-- <p class="steptext" style="font-family:verdana; font-size:14px;">&nbsp;Repeat the same procedure for further trials.</p> -->
+    <strong class="incanvas" style="position:absolute;top: 40px; left:50px; font-family:verdana;" ><h3>Observation</h3></strong>
+    
+    </div>
+    
+    <div id="canvas7" class="simsubscreen" style="visibility:hidden;">
+    <strong class="incanvas" id="ob"><h3>Observations: </h3></strong>
+   
+    </div>
+    
+    
+    <!--Trial text	-->
+    <div id="">
+    <p id="trial" style="text-transform: uppercase;visibility :hidden;font-weight: bold;font-family:verdana; "><strong>Trial = </strong></p>
+    </div>
+    
+    
+    <!--next  Arrow	-->
+    <div id="nav">
+        <img id="nextButton" onclick="navNext(); " src="Images/Next.png" />
+    </div>
+    
+    <!--Blinking Arrow	-->
+    <img class ="" id="arrow1" style="visibility:hidden" src="Images/arrow1.png"/>
+    
+    <div id="copyright"> &copy; 2016 SOLVE - The Virtual Lab @ NITK Surathkal, Department of Water Resources & Ocean Engineering</div>
+    <script src="./js/sample.js"></script>
+    </body>
+    </html>
+    
