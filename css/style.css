@@ -266,3 +266,14 @@ background:#000
 	from {transform: rotate(0deg)}
 	to {transform: rotate(30deg)}
 }
+
+@keyframes waterMove
+{
+	0% {left:450px;top:300px;}
+	100% {left:450px;top:250px;}
+}
+@-webkit-keyframes waterMove
+{
+	0% {left:450px;top:300px;}
+	100% {left:450px;top:250px;}
+}

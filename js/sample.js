@@ -45,11 +45,13 @@ function magic() {
     if(simsubscreennum == 1) {
         //Write code for canvas 1 animations
         myInt = setInterval(function(){ animatearrow(); }, 500);//calls blinking arrow function
-        animateArrowATPosition(420,350,-90);//specify the left top and deg of arrow
+        animateArrowATPosition(320,450,-90);//specify the left top and deg of arrow
         document.getElementById("translate").onclick = function() {
+            document.getElementById("translate").onclick ="";
             myStopFunction();//stops blinking arrow
             //you have below mentioned bucketMove css, next is durations, 3rd one: repeat value, 4th can be: linear, forwards, ease-in, ease-out can refer w3schools for available options
            
+            document.getElementById("water").style.animation = "waterMove 2.4s forwards";//Since it runs for 1.2s
             document.getElementById("bucket").style.animation = "bucketMove 1.2s 2 linear";//Since it runs for 1.2s
             //Next you have to write setTimeout function: what to run after 1.2s animation:
             //setTimeout duration is times*repeat if repeat is > 1
@@ -58,9 +60,11 @@ function magic() {
                 document.getElementById("scale").style.visibility = "visible";
 
                 myInt = setInterval(function(){ animatearrow(); }, 500);
-                animateArrowATPosition(480,350,-90);//specify the left top and deg of arrow
+                animateArrowATPosition(380,450,-90);//specify the left top and deg of arrow
 
                 document.getElementById("scale").onclick = function() {
+                document.getElementById("scale").onclick = "";
+                    
                     myStopFunction();//stops arrow blinking
 
                     document.getElementById("bucket").style.animation = "bucketScale 2.5s 2 linear";
@@ -69,9 +73,10 @@ function magic() {
                         document.getElementById("rotate").style.visibility = "visible";
 
                         myInt = setInterval(function(){ animatearrow(); }, 500);
-                        animateArrowATPosition(540,350,-90);//specify the left top and deg of arrow
+                        animateArrowATPosition(440,450,-90);//specify the left top and deg of arrow
 
                         document.getElementById("rotate").onclick = function() {
+                        document.getElementById("rotate").onclick = "";
                             myStopFunction();
                             document.getElementById("bucket").style.transformOrigin = "0% 50%";
                             document.getElementById("bucket").style.animation = "bucketRotate 1.2s linear"
