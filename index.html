@@ -18,24 +18,22 @@
     
     <!--SubScreen Home	-->
     <div class="simsubscreen" id="canvas0">
-    <h4 class="incanvas" style="font-family:verdana; ">Objective:</h4>
+    <h4 id="objective" style="font-family:verdana; ">Objective:</h4>
     <p class="incanvas" style="font-family:verdana; font-size:15px;">To prepare a casting for the solid pattern using sand moulding process.</p></br>
-    <h4 class="incanvas" style="font-family:verdana; ">Apparatus used:</h4>
+    <h4 id="apparatus" style="font-family:verdana; ">Apparatus used:</h4>
     <p class="incanvas" style="font-family:verdana; font-size:14px;">Moulding sand, Pattern, Moulding Boxes, Runner, Riser etc.</p>
-    <img id="" style="position: absolute; left: 370px; top: 285px; width:250px; height:150px;" title="tray" src="Images/1.png"/>
-    <!-- <img style="position:absolute; left:10px; top:160px;" title="" src="Images/human.png" /> -->
-    <img id="pat1" style="position:absolute; left:180px; top:290px; width:100px" title="pattern" src="Images/pat2.png" />
-    <img id="pat2" style="position:absolute; left:180px; top:350px; width:100px" title="pattern" src="Images/pat1.png" />
-    <img id="pat1" style="position:absolute; left:10px; top:250px; width:150px" title="sand" src="Images/bucket.png" />
+    
+    <img id="pat1" style="position:absolute; left:10px; top:250px; width:150px" title="sand" src="Images/box.png" />
      
     <!-- <img id="" style="position:absolute; left:250px;top:250px;" title="sand" src="./images/box.png" /> -->
     </div>
     
     <!--Step1	-->
     <div class="simsubscreen" id="canvas1" style="visibility:hidden">
-    <strong id="titlestep" class="incanvas">STEP </strong>
-    <span class="circlebg" id="stepnumber">&nbsp;1&nbsp;</span>
-    <p id="pumptext" class="steptext" style="font-family:verdana; font-size:14px;"> Set the inverted drag box on a clean floor and place the pattern inside the box.</p>
+    <p id="pumptext" class="steptext incanvas" style="font-family:verdana; font-size:14px;">
+        <strong id="titlestep" class="incanvas">STEP </strong>
+        <span class="circlebg" id="stepnumber">&nbsp;1&nbsp;</span> 
+        Set the inverted drag box on a clean floor and place the pattern inside the box.</p>
     <img id="bucket" style="position:absolute; left:50px;top:150px;" title="sand" src="./images/box.png" />
     <img id="water" style="position:absolute; left:450px;top:300px;" title="sand" src="./images/water.png" />
     <img id="cyl" style="position:absolute; left:450px;top:200px;" title="sand" src="./images/cyl.png" />
@@ -49,10 +47,10 @@
     
     
     <div class="simsubscreen" id="canvas2" style="visibility:hidden">
-    
-    <strong id="titlestep" class="incanvas">STEP &nbsp;</strong>
-    <span class="circlebg" id="stepnumber">&nbsp;2&nbsp;</span>
-    <p id="pumptext-2" class="steptext" style="font-family:verdana; font-size:14px;">&nbsp;Remove the stopper and add weighed amount of cement, then weigh the flask with stopper.</p>
+    <p id="pumptext" class="steptext incanvas" style="font-family:verdana; font-size:14px;">
+        <strong id="titlestep" class="incanvas">STEP </strong>
+        <span class="circlebg" id="stepnumber">&nbsp;2&nbsp;</span> 
+        Set the inverted drag box on a clean floor and place the pattern inside the box.</p>
     
     
     
@@ -60,21 +58,28 @@
     
     <!--Step3	-->
     <div class="simsubscreen" id="canvas3" style="visibility:hidden">
-    <strong class="incanvas">STEP &nbsp;</strong><span class="circlebg">&nbsp;3&nbsp;</span>
-    <p class="steptext" style="font-family:verdana; font-size:14px;">&nbsp;Add kerosene to the flask upto the graduated mark and shake it well to remove air bubbles. </p>
+    <p id="pumptext" class="steptext incanvas" style="font-family:verdana; font-size:14px;">
+        <strong id="titlestep" class="incanvas">STEP </strong>
+        <span class="circlebg" id="stepnumber">&nbsp;3&nbsp;</span> 
+        Set the inverted drag box on a clean floor and place the pattern inside the box.</p>
     
     </div>
     
     <!--Step4	-->
     <div class="simsubscreen" id="canvas4" style="visibility:hidden">
-    <strong class="incanvas">STEP &nbsp;</strong><span class="circlebg">&nbsp;4&nbsp;</span>
+    <p id="pumptext" class="steptext incanvas" style="font-family:verdana; font-size:14px;">
+        <strong id="titlestep" class="incanvas">STEP </strong>
+        <span class="circlebg" id="stepnumber">&nbsp;4&nbsp;</span> 
+        Set the inverted drag box on a clean floor and place the pattern inside the box.</p>
     
     </div>
     
     <!--Step5	-->
     <div class="simsubscreen" id="canvas5" style="visibility:hidden">
-    <strong class="incanvas">STEP &nbsp;</strong><span class="circlebg">&nbsp;5&nbsp;</span>
-    <p class="steptext" style="font-family:verdana; font-size :14px;">&nbsp;Add water to Le-Chatelier’s flask upto graduated mark and weigh it. </p>
+    <p id="pumptext" class="steptext incanvas" style="font-family:verdana; font-size:14px;">
+        <strong id="titlestep" class="incanvas">STEP </strong>
+        <span class="circlebg" id="stepnumber">&nbsp;5&nbsp;</span> 
+        Set the inverted drag box on a clean floor and place the pattern inside the box.</p>
     
     </div>
     
@@ -85,10 +90,7 @@
     
     </div>
     
-    <div id="canvas7" class="simsubscreen" style="visibility:hidden;">
-    <strong class="incanvas" id="ob"><h3>Observations: </h3></strong>
-   
-    </div>
+    
     
     
     <!--Trial text	-->
@@ -105,7 +107,7 @@
     <!--Blinking Arrow	-->
     <img class ="" id="arrow1" style="visibility:hidden" src="Images/arrow1.png"/>
     
-    <div id="copyright"> &copy; 2016 SOLVE - The Virtual Lab @ NITK Surathkal, Department of Water Resources & Ocean Engineering</div>
+    <div id="copyright"> &copy; 2020 SOLVE - The Virtual Lab @ NITK Surathkal, Department of Water Resources & Ocean Engineering</div>
     <script src="./js/sample.js"></script>
     </body>
     </html>
