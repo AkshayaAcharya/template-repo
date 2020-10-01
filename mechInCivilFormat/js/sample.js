@@ -30,7 +30,7 @@ function myStopFunction()
 //function to move to next canvas
 function navNext()
 {
-	for(temp=0;temp<=3;temp++)
+	for(temp=0;temp<=6;temp++)
 	{
 		document.getElementById("canvas"+temp).style.visibility="hidden";
 	}
@@ -89,8 +89,16 @@ function magic() {
             },2450)
         }
     } else if(simsubscreennum == 2) {
-        document.getElementById("nextButton").style.visibility = "hidden";
+        document.getElementById("nextButton").style.visibility = "visible";
         document.getElementById("scale").style.visibility = "hidden";
         document.getElementById("rotate").style.visibility = "hidden";
+    } else if(simsubscreennum == 3) {
+        document.getElementById("nextButton").style.visibility = "visible";
+    } else if(simsubscreennum == 4) {
+        document.getElementById("nextButton").style.visibility = "visible";
+    } else if(simsubscreennum == 5) {
+        document.getElementById("nextButton").style.visibility = "visible";
+    } else if(simsubscreennum == 6) {
+        document.getElementById("nextButton").style.visibility = "visible";
     }
 }
