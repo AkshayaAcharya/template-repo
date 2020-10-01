@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="UTF-8">
+
+<title>SOLVE - Mechanics of Machines Lab - Four Bar Mechanism</title>
+
+<!-- DND-Required css and js files -->
+<link rel="stylesheet" href="./css/MOMstyle.css" />
+
+<script src='./js/jquery.min.js'></script>
+<script src='./js/jquery-ui.min.js'></script>
+
+<script type="text/javascript" src= "./js/MOMscript.js"></script>
+<script type="text/javascript" >
+//Script specific to simulation
+
+//program variables
+//controls section
+var simstatus=0; 
+var rotstatus=1;
+//comments section
+var commenttext="Some Text";
+var commentloc=0;
+
+var trans = new point(150,150);//top view center point
+
+//computing section
+ 
+var theta = 0; // all angles to be defined either in degrees only or radians only throughout the program and convert as and when required
+
+//origin points circle and line to points
+
+var o= new point(0,0,"0");
+var a= new point(0,0,"a");
+var b= new point(0,0,"b");
+
+
+
+
+var j = 0;
+
+
+//length of link
+var len = 50;
+
+//graphics section
+var canvas;
+var ctx;
+
+//timing section
+var simTimeId = setInterval("",'1000');
+var pauseTime = setInterval("",'1000');
+var time=0;
+
+//point tracing section
+var ptx = [];
+var pty = [];
+
+//click status of legend and quick reference
+var legendCS = false;
+var quickrefCS = false;
+//temporary or dummy variables
+var temp=0;
+
+/*
+// for trials during development
+function trythis()
+{ 		alert();}
+*/
+
+//change simulation specific css content. e.g. padding on top of variable to adjust appearance in variables window
+function editcss()
+{
+$('.variable').css('padding-top','20px');
+$('#datatable1').css('position','absolute');
+$('#datatable2').css('position','absolute');
+$('#datatable1').css('left','120px');
+$('#datatable1').css('top','340px');
+$('#datatable2').css('left','395px');
+$('#datatable2').css('top','340px');
+
+//$('#legend').css("width",document.getElementById('legendimg').width+"px");
+//$('#quickref').css("height",document.getElementById('quickrefimg').height+"px");
+
+}
+
+//start of simulation here; starts the timer with increments of 0.1 seconds
+function startsim()
+{
+	simTimeId=setInterval("time=time+0.1; varupdate(); ",'100');
+}
+
+// switches state of simulation between 0:Playing & 1:Paused
+function simstate()
+{
+  var imgfilename=document.getElementById('playpausebutton').src;
+  imgfilename = imgfilename.substring(imgfilename.lastIndexOf('/') + 1, imgfilename.lastIndexOf('.'));
+  if (imgfilename=="bluepausedull")
+  {
+    document.getElementById('playpausebutton').src="./images//blueplaydull.png";
+	 clearInterval(simTimeId);
+    simstatus=1;
+    $('#l1spinner').spinner("value",len);			//to set simulation parameters on pause
+    pauseTime=setInterval("varupdate();",'100');
+  }
+    if (imgfilename=="blueplaydull")
+  {
+  	 time=0;			
+  	 clearInterval(pauseTime);
+    document.getElementById('playpausebutton').src="./images//bluepausedull.png";
+    simTimeId=setInterval("time=time+0.1; varupdate(); ",'100');    
+    simstatus=0;
+  } 
+}
+
+// switches state of rotation between 1:CounterClockWise & -1:Clockwise
+function rotstate()
+{
+  var imgfilename=document.getElementById('rotationbutton').src;
+  imgfilename = imgfilename.substring(imgfilename.lastIndexOf('/') + 1, imgfilename.lastIndexOf('.'));
+  if (imgfilename=="bluecwdull")
+  {
+    document.getElementById('rotationbutton').src="./images/blueccwdull.png";
+    rotstatus=-1;
+  }
+    if (imgfilename=="blueccwdull")
+  {
+    document.getElementById('rotationbutton').src="./images/bluecwdull.png";
+    rotstatus=1;
+  } 
+}
+
+
+
+//Initialise system parameters here
+function varinit()
+{
+	varchange();		
+	//Variable r1 slider and number input types
+	$('#fslider').slider("value", 750);	
+	$('#fspinner').spinner("value", 750);
+
+	$('#wslider').slider("value", 5);	
+	$('#wspinner').spinner("value", 5);
+
+	$('#k1slider').slider("value", 2500);	
+	$('#k1spinner').spinner("value", 2500);
+
+	$('#m1slider').slider("value", 250);	
+	$('#m1spinner').spinner("value", 250);
+
+	$('#k2slider').slider("value", 500);	
+	$('#k2spinner').spinner("value", 500);
+
+	$('#m2slider').slider("value", 50);	
+	$('#m2spinner').spinner("value", 50);
+
+
+}
+
+
+
+// Initialise and Monitor variable containing user inputs of system parameters.
+//change #id and repeat block for new variable. Make sure new <div> with appropriate #id is included in the markup
+function varchange()
+{
+//Variable f0 slider and number input types
+$('#fslider').slider({ max : 1000, min : 500, step : 50 });		// slider initialisation : jQuery widget
+$('#fspinner').spinner({ max : 1000, min : 500, step : 50 });		// number initialisation : jQuery widget			
+// monitoring change in value and connecting slider and number
+// setting trace point coordinate arrays to empty on change of link length
+$( "#fslider" ).on( "slide", function( e, ui ) { $('#fspinner').spinner("value",ui.value); ptx=[]; pty=[];j = 0 ;} );
+$( "#fspinner" ).on( "spin", function( e, ui ) { $('#fslider').slider("value",ui.value); ptx=[]; pty=[];j=0;} );
+$( "#fspinner" ).on( "change", function() {  varchange() } );
+
+//Variable w slider and number input types
+$('#wslider').slider({ max : 16, min : 0, step : 0.01 });		// slider initialisation : jQuery widget
+$('#wspinner').spinner({ max : 16, min : 0, step : 0.01 });		// number initialisation : jQuery widget			
+// monitoring change in value and connecting slider and number
+// setting trace point coordinate arrays to empty on change of link length
+$( "#wslider" ).on( "slide", function( e, ui ) { $('#wspinner').spinner("value",ui.value); ptx=[]; pty=[];j = 0 ;} );
+$( "#wspinner" ).on( "spin", function( e, ui ) { $('#wslider').slider("value",ui.value); ptx=[]; pty=[];j=0;} );
+$( "#wspinner" ).on( "change", function() {  varchange() } );
+
+//Variable k1 slider and number input types
+$('#k1slider').slider({ max : 5000, min : 2000, step : 50 });		// slider initialisation : jQuery widget
+$('#k1spinner').spinner({ max : 5000, min : 2000, step : 50 });		// number initialisation : jQuery widget			
+// monitoring change in value and connecting slider and number
+// setting trace point coordinate arrays to empty on change of link length
+$( "#k1slider" ).on( "slide", function( e, ui ) { $('#k1spinner').spinner("value",ui.value); ptx=[]; pty=[];j = 0 ;} );
+$( "#k1spinner" ).on( "spin", function( e, ui ) { $('#k1slider').slider("value",ui.value); ptx=[]; pty=[];j=0;} );
+$( "#k1spinner" ).on( "change", function() {  varchange() } );
+
+//Variable m1 slider and number input types
+$('#m1slider').slider({ max : 500, min : 200, step : 10 });		// slider initialisation : jQuery widget
+$('#m1spinner').spinner({ max : 500, min : 200, step : 10 });		// number initialisation : jQuery widget			
+// monitoring change in value and connecting slider and number
+// setting trace point coordinate arrays to empty on change of link length
+$( "#m1slider" ).on( "slide", function( e, ui ) { $('#m1spinner').spinner("value",ui.value); ptx=[]; pty=[];j = 0 ;} );
+$( "#m1spinner" ).on( "spin", function( e, ui ) { $('#m1slider').slider("value",ui.value); ptx=[]; pty=[];j=0;} );
+$( "#m1spinner" ).on( "change", function() {  varchange() } );
+
+//Variable k2 slider and number input types
+$('#k2slider').slider({ max : 1000, min : 200, step : 50 });		// slider initialisation : jQuery widget
+$('#k2spinner').spinner({ max : 1000, min : 200, step : 50 });		// number initialisation : jQuery widget			
+// monitoring change in value and connecting slider and number
+// setting trace point coordinate arrays to empty on change of link length
+$( "#k2slider" ).on( "slide", function( e, ui ) { $('#k2spinner').spinner("value",ui.value); ptx=[]; pty=[];j = 0 ;} );
+$( "#k2spinner" ).on( "spin", function( e, ui ) { $('#k2slider').slider("value",ui.value); ptx=[]; pty=[];j=0;} );
+$( "#k2spinner" ).on( "change", function() {  varchange() } );
+
+//Variable m2 slider and number input types
+$('#m2slider').slider({ max : 100, min : 10, step : 1 });		// slider initialisation : jQuery widget
+$('#m2spinner').spinner({ max : 100, min : 10, step : 1 });		// number initialisation : jQuery widget			
+// monitoring change in value and connecting slider and number
+// setting trace point coordinate arrays to empty on change of link length
+$( "#m2slider" ).on( "slide", function( e, ui ) { $('#m2spinner').spinner("value",ui.value); ptx=[]; pty=[];j = 0 ;} );
+$( "#m2spinner" ).on( "spin", function( e, ui ) { $('#m2slider').slider("value",ui.value); ptx=[]; pty=[];j=0;} );
+$( "#m2spinner" ).on( "change", function() {  varchange() } );
+
+varupdate();
+
+}
+
+
+
+//Computing of various system parameters
+function varupdate()
+{
+
+  // $('#l1slider').slider("value", $('#l1spinner').spinner('value'));  //updating slider location with change in spinner(debug)
+  // len=$('#l1spinner').spinner("value");
+
+//If simulation is running
+if(!simstatus)
+{
+	//everytime decremented theta value by 20
+	theta=theta-20;
+	
+	//to have theta within the range 0 to 360
+	theta=theta%360;
+	
+	//if theta is less than 0 then it should get updated to 360
+	if(theta<0)
+		theta+=360;
+
+}
+
+//If simulation is stopped
+if(simstatus)
+{
+	// printcomment("Left Side Comment:Length: "+len,1);
+	// printcomment("Right Side Comment:Angle: "+theta,2);
+	
+}
+printcomment("Left Side Comment Box ",1);
+printcomment("Right Side Comment Box ", 2	);
+
+	o.xcoord=0;
+	o.ycoord=0;
+	
+	a.xcoord=100;
+	a.ycoord=100*Math.sin(rad(theta));
+	
+	b.xcoord=100*Math.cos(rad(theta));
+	b.ycoord=-200;
+	
+  draw();
+
+}
+
+//Simulation graphics
+function draw()
+{
+  canvas = document.getElementById("simscreen");
+  ctx = canvas.getContext("2d");
+  ctx.clearRect(0,0,550,400);  //clears the complete canvas#simscreen everytime
+  
+  //Setting position of point
+  pointtrans(o,trans);
+  pointtrans(b,trans);
+  pointtrans(a,trans);
+
+
+  //join points 
+  pointjoin(o,a,ctx,"#0885d8",5);
+  pointjoin(o,b,ctx,"#0885d8",5);
+  
+
+  //display points
+  pointdisp(o,ctx,10,'#600217','#600217');
+	pointdisp(a,ctx,10,'#600217','#600217');
+	pointdisp(b,ctx,10,'#600217','#600217');
+ 
+ }
+
+
+// prints comments passed as 'commenttext' in location specified by 'commentloc' in the comments box;
+// 0 : Single comment box, 1 : Left comment box, 2 : Right comment box
+function printcomment(commenttext,commentloc)
+{
+  if(commentloc==0)
+  {
+  document.getElementById('commentboxright').style.visibility='hidden';
+  document.getElementById('commentboxleft').style.width='570px';
+  document.getElementById('commentboxleft').innerHTML = commenttext;
+  }
+  else if(commentloc==1)
+  {
+  document.getElementById('commentboxright').style.visibility='visible';
+  document.getElementById('commentboxleft').style.width='285px';
+  document.getElementById('commentboxleft').innerHTML = commenttext;
+  }
+  else if(commentloc==2)
+  {
+  document.getElementById('commentboxright').style.visibility='visible';
+  document.getElementById('commentboxleft').style.width='285px';
+  document.getElementById('commentboxright').innerHTML = commenttext;
+  }
+  else
+  {
+  document.getElementById('commentboxright').style.visibility='hidden';
+  document.getElementById('commentboxleft').style.width='570px';
+  document.getElementById('commentboxleft').innerHTML = "<center>please report this issue to adityaraman@gmail.com</center>"; 
+  // ignore use of deprecated tag <center> . Code is executed only if printcomment function receives inappropriate commentloc value
+  }
+}
+
+
+
+</script>
+
+</head>
+
+<body onload="editcss(); startsim(); varinit();">
+
+<!-- DND-Verifying JavaScript is enabled in browser -->
+<noscript>
+The simulation requires JavaScript to be enabled.
+</noscript>
+
+<!-- 
+Author : Sai Aditya Raman 
+send an email to adityaraman09@gmail.com for any communication
+-->
+
+<!-- Defining Container for Simulation -->
+<div id="container">
+
+<!-- Replace TITLE with simulation title to be displayed next to logo-->
+<div id="simtitle">Simulation Title</div>
+
+<!-- Region for simulation display -->
+<canvas id="simscreen" height="400px" width="550px"></canvas>
+
+<div id="titleincanvas"></div>
+
+
+
+<!-- Region for comment / question prompts -->
+<div id="commentboxleft"></div>
+<div id="commentboxright"></div>
+
+<!-- DND-Title of region for variables display --> 
+<div id="vartitle">VARIABLES</div>
+
+<!-- Region for Input parameters of simulation -->
+<div id="variables">
+
+<!-- System variable input from user through slider and spinner jQuery widgets 
+repeat block with new variable name and new id for widgets-->
+<div class="variable">
+	<div class="varname"><p title="Link Length">F0(N)</p>
+		<input id="fspinner"></input></div>
+	<div id="fslider"></div>
+</div>
+
+<div class="variable">
+	<div class="varname"><p title="Link Length">&omega;(rad/s)</p>
+		<input id="wspinner"></input></div>
+	<div id="wslider"></div>
+</div>
+
+<div class="variable">
+	<div class="varname"><p title="Link Length">K1(N/m)</p>
+		<input id="k1spinner"></input></div>
+	<div id="k1slider"></div>
+</div>
+
+<div class="variable">
+	<div class="varname"><p title="Link Length">M1(kg)</p>
+		<input id="m1spinner"></input></div>
+	<div id="m1slider"></div>
+</div>
+
+<div class="variable">
+	<div class="varname"><p title="Link Length">K2(N/m)</p>
+		<input id="k2spinner"></input></div>
+	<div id="k2slider"></div>
+</div>
+
+<div class="variable">
+	<div class="varname"><p title="Link Length">M2(kg)</p>
+		<input id="m2spinner"></input></div>
+	<div id="m2slider"></div>
+</div>
+
+
+
+</div>
+
+<!-- DND-Title of region for controls display -->
+<div id="ctrltitle">CONTROLS</div>
+
+<!-- Region for User controls of simulation -->
+<div id="controls">
+<img id="playpausebutton" onclick="simstate()" src="./images/bluepausedull.png" />
+<img id="rotationbutton" onclick="rotstate()" src="./images//bluecwdull.png" />
+
+<!--
+<div class="usercheck">
+<!-- Point tracing
+<input type="checkbox" id="trace" ></input> <p>Trace Mid Point</p>
+<!-- Reset Parameters
+<input type="button" id="resetparams" value="Reset" onclick="varinit();"></input> -->
+</div>
+
+
+<!-- DND-Copyright display-->
+<div id="copyright" title="Developer : SOLVEr"> Copyright &copy; SOLVE The Virtual Lab @ NITK Surathkal </div>
+
+</div><!-- Container div close -->
+
+<!-- For trials during development
+write in trythis() function the outputs that you want to check.
+<input type='button' onclick='trythis()' value="try me"></input> 
+-->
+
+
+
+</body>
+</html>
